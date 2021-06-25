@@ -1,0 +1,296 @@
+<!-- Start of Header Code -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+
+<title>Sliding Window Videos</title>
+</head>
+<body>
+<div id="wrapper">
+
+<div id="menu-bar">
+<center><h1>Geometry of Sliding Window Videos</h1></center>
+<ul class="menus-level0">
+<li><a href="index.html">Home</a></li>
+<li><a href = "background.html">Background</a></li>
+<li><a href = "sliding1D.html">1D Sliding Windows</a><BR></li>
+<li><a href = "slidingvideo.html"><b>Sliding Window Videos</b></a></li>
+<li><a href = "hidden.html"><b>Hidden Motion</b></a></li>
+</ul>
+</div>
+<!-- End of Header Code -->
+
+
+<div id="page-content">
+<h1>Sliding Window Videos</h1>
+
+<ul>
+<li><a href = "#overview">Overview</a></li>
+<li><a href = "#jj">Jumping Jacks Video</a></li>
+<li><a href = "#highdim">Explanation of High Dimensionality</a></li>
+<li><a href = "#jjpc">Jumping Jacks Principal Components</a></li>
+<li><a href = "#heart">Synthetic Beating Heart</a></li>
+<li><a href = "#heartpc">Heart Principal Components</a></li>
+</ul>
+
+
+<h2><a name = "overview">Overview</a></h2>
+The idea is exactly the same as <a href = "sliding1D.html">sliding windows for 1D time series</a>, except now we take stacks of image frames in time.  We then concatenate ever pixel in every frame one large Euclidean vector.  The figure below depicts this scheme:<BR><BR>
+
+<img src = "VideoStackTime.png">
+
+
+
+
+<h2><a name = "jj">Jumping Jacks Video</a></h2>
+
+Below is a video of a woman doing jumping jacks, next to PCA of the raw video (i.e. no sliding window; each frame of the video is a single Euclidean vector, with each pixel as a dimension)<BR><BR>
+
+<video width = 1000 controls>
+  <source src="JumpingJacksRaw.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+As you can see, the embedding forms a topological path, and the path retraces itself on the way back down.  In the embedding space, it is therefore impossible to tell the difference between "going up" and "going down."  When we add the sliding window, however, this turns into a topological loop, and we can now disambiguate all states in the embedding space:<BR><BR>
+
+<video width = 1000 controls>
+  <source src="jumpingjackssliding.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+However, PCA to 3 dimensions only retains about 14% of the variance in the dataset.  In spite of this, we are able to see that there is a strong 1-cycle using topological tools, as seen in the 1D Rips persistence diagram below:<BR><BR>
+
+<img src = "PDJumpingJacks.png"><BR><BR>
+
+Also, 1D cohomology is able to parameterize the motion around the loop with circular coordinates:<BR><BR>
+
+<img src = "JumpingJacksCircCoords.png">
+
+
+
+
+<h2><a name = "highdim">Explanation of High Dimensionality</a></h2>
+
+
+Why is so little variance explained by the first 3 principal components?  In other words, why do these embeddings lie in such a high dimensional space? To understand this, we note a common case in natural videos of pixels jumping abruptly from the foreground into the background.  This video shows a plot of the average RGB values in the green box drawn on the left<BR><BR>
+
+<video width = 1000 controls>
+  <source src="Pixel.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+
+As you can see, the pixels jump abruptly from foreground to background to foreground again, forming something like a square wave, which needs many harmonics to represent.  As we noted in the 1D case, each harmonic needs two dimensions to represent, and this video at this resolution needs about 25 harmonics.
+
+<h2><a name = "jjpc">Jumping Jacks Principal Components</a></h2>
+
+Let's take a look at the coordinate axes spanning the ellipses of the first few harmonics in the jumping jacks video.  Since the sliding window embedding is a stack of frames, each axis can be played as a video:<BR><BR>
+
+<h2>Original Video</h2>
+<video width = 250 controls>
+  <source src="jumpingjackscropped.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<table border = "1">
+
+<tr><td><h2>1</h2></td><td><h2>2</h2></td><td><h2>3</h2></td><td><h2>4</h2></td></tr>
+
+<tr>
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC0.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC1.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC2.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC3.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+</tr>
+
+<tr><td><h2>5</h2></td><td><h2>6</h2></td><td><h2>7</h2></td><td><h2>8</h2></td></tr>
+
+<tr>
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC4.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC5.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC6.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+<td>
+<video width = 250 controls>
+  <source src="JumpingJacksPCs/PC7.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+</tr>
+
+</table>
+<BR><BR>
+As you can see, each pair of principal components forms an in phase and quadrature component of a harmonic (integer multiple) of the main periodic motion in the video.  The first two form the smoothest sinusoidal approximation which goes through one cycle, the next two go through two cycles per period, etc.   As in Fourier Series approximations of functions, higher pairs are needed to represent sharper transitions from foreground to background.
+
+<h2><a name = "heart">Synthetic Beating Heart</a></h2>
+
+As another example, take the following animation of a beating heart:<BR><BR>
+
+<video width = 300 controls>
+  <source src="heartcrop.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<BR><BR>
+
+Here's what the sliding window embedding looks like with PCA:<BR><BR>
+
+<video width = 1000 controls>
+  <source src="BeatingHeartSyntheticSliding.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+and here are the persistence diagram and circular coordinates, which recover the cycle:<BR><BR>
+
+<img src = "PDBeatingHeart.png"><BR><BR>
+
+<img src = "HeartbeatCircCoords.png"><BR><BR>
+
+
+<h2><a name = "heartpc">Heart Principal Components</a></h2>
+
+As in the <a href = "#jjpc">jumping jacks example</a>, we can examine principal component directions in the embedding space and play them back as videos.  Here are the results:<BR><BR>
+
+<h2>Original Video</h2>
+<video width = 250 controls>
+  <source src="heartcrop.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<table border = "1">
+
+<tr><td><h2>1</h2></td><td><h2>2</h2></td><td><h2>3</h2></td><td><h2>4</h2></td></tr>
+
+<tr>
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC0.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC1.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC2.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC3.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+</tr>
+
+<tr><td><h2>5</h2></td><td><h2>6</h2></td><td><h2>7</h2></td><td><h2>8</h2></td></tr>
+
+<tr>
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC4.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC5.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC6.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+
+<td>
+<video width = 250 controls>
+  <source src="HeartbeatPCs/PC7.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=7309088; 
+var sc_invisible=1; 
+var sc_security="f655b56d"; 
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hit counter"
+href="http://statcounter.com/" target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/7309088/0/f655b56d/1/" alt="free hit
+counter"></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!-- Start of Header Code -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+
+<title>Sliding Window Videos</title>
+</head>
+<body>
+<div id="wrapper">
+
+<div id="menu-bar">
+<center><h1>Geometry of Sliding Window Videos</h1></center>
+<ul class="menus-level0">
+<li><a href="index.html">Home</a></li>
+<li><a href = "background.html">Background</a></li>
+<li><a href = "sliding1D.html">1D Sliding Windows</a><BR></li>
+<li><a href = "slidingvideo.html"><b>Sliding Window Videos</b></a></li>
+<li><a href = "hidden.html"><b>Hidden Motion</b></a></li>
+</ul>
+</div>
+<!-- End of Header Code -->
+
+
+<div id="page-content">
+<h1>Background</h1>
+
+<ul>
+<li><a href = "#pca">Principal Component Analysis (PCA)</a></li>
+<li><a href = "#tda">Topological Data Analysis (TDA)</a></li>
+</ul>
+
+<h2><a name = "pca">Principal Component Analysis (PCA)</a></h2>
+
+PCA is a technique for linear dimension reduction.  It can be thought of as a generalization of linear regression to higher dimensions.  In particular, PCA finds an orthogonal set of directions in the data space so that the first direction is the maximum direction of variance in the point cloud, the second direction is the maximum direction of variance after projecting away the first direction, and so on.  The video below shows an example of applying PCA to a 3D point cloud of a sword.  The first principal axis is drawn in red, the second is drawn in green, and the third is drawn in blue:<BR><BR>
+
+
+<video controls>
+  <source src="SwordPCA.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<BR><BR>
+Often, PCA is used for dimension reduction for denoising or visualization purposes by projecting the point cloud onto the subspace spanned by the first few components.  The image below shows what this would look like for the above example, projecting down onto the first two principal components:<BR><BR>
+
+<img src = "SwordPCA.png">
+
+
+<h2><a name = "tda">Topological Data Analysis (TDA)</a></h2>
+
+<p>
+Topological data analysis is used to describe multiscale information about connectivity, loops, and voids in point cloud data.  In particular, 1D persistent homology is an algebraic framework for describing equivalence classes of loops as a filtration of simplicial complexes is constructed over a point cloud.  For a <i>Rips Filtration</i>, edges are progressively added between pairs of points in increasing order of distance.  When an edge is added that forms a cycle, this is called a <b>birth event</b> of a cycle class.  Triangles are also added between three points whose edges are all in the complex, and a cycle class is said to "die" the moment all cycles in that class are expressible as boundaries of filled in triangles.
+</p>
+
+<p>
+A <i>persistence diagram</i> summarizes all of this information by plotting the birth times on the x-axis and the death times on the y-axis, and the "persistence" of a cycle class is the death time minus the birth time.  The persistence can be thought of as a measure of the importance or roundness of a cycle class.  Importantly in our work, this theory works regardless of ambient dimension.  The video below shows an example Rips filtration on a 2D point cloud, along with its birth and death events, which are depicted in the persistence diagram to the right
+</p>
+
+<video controls>
+  <source src="PersistenceExample.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<p>
+Additionally, a dual version of the theory, called persistent cohomology, is able to construct maps from the point cloud to the circle localized to a chosen class, which we use to parameterize videos with circular coordinates by finding a map of the class with the largest persistence.  The image below shows circular coordinates for the cycle class with the larger persistence in the above example
+</p>
+
+<img src = "CircularCoordinates.png">
+
+</div>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=7309088; 
+var sc_invisible=1; 
+var sc_security="f655b56d"; 
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hit counter"
+href="http://statcounter.com/" target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/7309088/0/f655b56d/1/" alt="free hit
+counter"></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body>
+</html>

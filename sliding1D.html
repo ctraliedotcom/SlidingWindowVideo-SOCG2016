@@ -1,0 +1,105 @@
+<!-- Start of Header Code -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+
+<title>Sliding Window Videos</title>
+</head>
+<body>
+<div id="wrapper">
+
+<div id="menu-bar">
+<center><h1>Geometry of Sliding Window Videos</h1></center>
+<ul class="menus-level0">
+<li><a href="index.html">Home</a></li>
+<li><a href = "background.html">Background</a></li>
+<li><a href = "sliding1D.html">1D Sliding Windows</a><BR></li>
+<li><a href = "slidingvideo.html"><b>Sliding Window Videos</b></a></li>
+<li><a href = "hidden.html"><b>Hidden Motion</b></a></li>
+</ul>
+</div>
+<!-- End of Header Code -->
+
+
+<div id="page-content">
+<h1>1D Sliding Windows</h1>
+
+
+Before moving onto videos, a few prerequisites are needed on sliding windows of 1D time series.  A sliding window of a 1D time series is a subset of a contiguous set of samples of the time series, each of which forms a dimension in a so-called <i>phase space</i>.  As the starting point of the window is slid from left to right across the signal, points on a manifold are traced out in the embedding space.  In the example below, we show a sliding window on a perfect 1D sinusoid, and we display 2D PCA of its sliding window embedding on the right, with a window length equal to the period:<BR><BR>
+
+
+<video width = 1000 controls>
+  <source src="1sine.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+As you can see, the embedding lies on a circle, and 100% of the variance is captured in these two dimensions.  When we add another sinusoid, however, the geometry gets much more complicated, as shown in the example below, with 3D PCA showing the geometry
+
+<BR><BR>
+<video width = 1000 controls>
+  <source src="2SinesCommensurate.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<p>
+In fact, 3 dimensions isn't enough to fully capture the geometry.  In this example, 4 dimensions are needed.  And in general for each additional sinusoidal component, an additional two dimensions are needed.  In particular, each sinusoid contributes an independent ellipse, so the sliding window embeddings lie on hypertorri.  So this example with two sinusoidal components lies on a subset of the 2-torus
+</p>
+
+<p>
+Even though we can't visualize the geometry in 3 dimensions without loss, we can still use other high dimensional tools.  In this case, we compute the one dimensional persistence diagram for the Rips filtration, which indicates the geometric strength of loops in a point cloud (see <a href = "background.html#tda">background</a>).   In this example, there is one strong class corresponding to the loop that this sliding window embedding completes over and over again on the 2-torus
+</p>
+
+<img src = "PD2SinesCommensurate.png">
+<BR><BR>
+
+Let's now look at another example with two sinusoids which are noncommensurate; that is, the ratio between their two periods is irrational.  In this example the ratio is pi:<BR><BR>
+
+<video width = 1000 controls>
+  <source src="2SinesNoncommensurate.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<p>
+In this example, it appears that the sliding window embedding is filling out a surface instead of just a curve.  In fact, if this went on forever, it would fill out the entire 2-torus in 4 dimensions.  Indeed, the persistence diagram indicates two highly persistent 1D classes with early birth times.  
+</p>
+
+<img src = "PD2SinesNoncommensurate.png">
+
+<p>
+What exactly is going on here?  One way of explaining the difference is to look at the principal square of the 2 torus, and to plot the phase of one sinusoid on the x-axis and the phase of the other sinusoid on the y-axis.  For the commensurate case <code>sin(t) + sin(3t)</code> after the longer period completes, the curve retraces the same exact path along the torus:<BR><BR>
+
+<video width = 1000 controls>
+  <source src="TorusCommensurate.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<BR><BR>
+For the noncommensurate case, on the other hand, the path never retraces itself, so eventually the curve will fill the entire surface of the torus:<BR><BR>
+
+<video width = 1000 controls>
+  <source src="TorusNoncommensurate.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+</p>
+
+</div>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=7309088; 
+var sc_invisible=1; 
+var sc_security="f655b56d"; 
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hit counter"
+href="http://statcounter.com/" target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/7309088/0/f655b56d/1/" alt="free hit
+counter"></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!-- Start of Header Code -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+
+<title>Sliding Window Videos</title>
+</head>
+<body>
+<div id="wrapper">
+
+<div id="menu-bar">
+<center><h1>Geometry of Sliding Window Videos</h1></center>
+<ul class="menus-level0">
+<li><a href="index.html">Home</a></li>
+<li><a href = "background.html">Background</a></li>
+<li><a href = "sliding1D.html">1D Sliding Windows</a><BR></li>
+<li><a href = "slidingvideo.html"><b>Sliding Window Videos</b></a></li>
+<li><a href = "hidden.html"><b>Hidden Motion</b></a></li>
+</ul>
+</div>
+<!-- End of Header Code -->
+
+
+<div id="page-content">
+<h1>Hidden Motion</h1>
+ We conclude this work by examining a video which has hidden periodic motion.  Here is a video of the author sitting completely still not breathing, and there appears to be very little motion:<BR><BR>
+
+
+<video width = 500 controls>
+  <source src="myneck.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+
+However, when we look at PCA, ignoring the first few components which correspond to drift, we see a cyclic pattern along a cylinder:<BR><BR>
+
+<video width = 1000 controls>
+  <source src="SubtleMotionOriginal.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+
+And when we look at the 1D persistence diagram, we see a strong 1D persistence class rising above the noise:<BR><BR>
+
+<img src = "PDBeatingNeck.png"><BR><BR>
+
+What's going on here?  If we apply phase-based video magnification techniques to the video to boost subtle signals and show PCA again, we see what's actually been captured by the sliding window embedding is something related to the person's heartbeat:<BR><BR>
+
+<video width = 1000 controls>
+  <source src="SubtleMotionAmplified.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video><BR><BR>
+
+Notice, for example, how the subclavic artery causes the collarbone to move up and down with each heartbeat, and notice how the person shakes back and forth twice for each heartbeat.  It's this shaking that causes the delay embedding to go through two loops for each beat.   Indeed, the cohomology circular coordinate parameterizes this motion nicely:<BR><BR>
+
+<img src = "HiddenMotionCircCoords.png"><BR><BR>
+
+Based on the framerate of 25 frames per second and the observation that the circular coordinates are picking up on twice the heartbeat, we estimate the average heartrate of this person to be between 61 and 62 beats per minute.
+
+</div>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=7309088; 
+var sc_invisible=1; 
+var sc_security="f655b56d"; 
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hit counter"
+href="http://statcounter.com/" target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/7309088/0/f655b56d/1/" alt="free hit
+counter"></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body>
+</html>
